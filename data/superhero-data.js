@@ -3,10 +3,12 @@
 module.exports = function(model){
     let { Superhero } = model;
     return {
-        createSuperhero(name, secretIdentity, alignment, story, image, powers, fractions){
-            var superhero = new Superhero({
+        //change like in fraction
+        createSuperhero(name, secretIdentity, city, alignment, story, image, powers, fractions){
+            let superhero = new Superhero({
                 name, 
                 secretIdentity,
+                city,
                 alignment, 
                 story, 
                 image, 
@@ -64,12 +66,19 @@ module.exports = function(model){
                 });
             });
         },
-
+        getSuperheroById(id){
+            return new Promise((resolve, reject) => {
+                Superhero.findOne({_id:id},(err, superhero) => {
+                    if(err){
+                       return reject(err);
+                    }
+                    return resolve(superhero);
+                });
+            });
+        }, 
         getSuperheroBySecretIdentity(identity){
             return new Promise((resolve, reject)=>{
-                Superhero.findOne({
-                     secretIdentity: identity 
-                    }, (err, superhero) => {
+                Superhero.findOne({ secretIdentity: identity }, (err, superhero) => {
                        if(err){
                           return reject(err);
                        }     

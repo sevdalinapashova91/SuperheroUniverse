@@ -16,6 +16,10 @@ const superheroSchema = new mongoose.Schema({
         maxlength: 20,
         unique: true
     },
+    city:{
+        type: [{}],
+        required:true
+    },
     alignent:{
         type: String,
         required: true,
